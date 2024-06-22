@@ -4,17 +4,107 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Remove Background</title>
+    <link
+      rel="shortcut icon"
+      href="../Images/cc-logo.jpg"
+      type="image/x-icon"
+    />
     <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
       .heading {
         text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      input[type="file"] {
+        margin-bottom: 12px;
+      }
+
+      select,
+      button {
+        padding: 10px;
+        font-size: 16px;
+        margin-top: 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      .message {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #dff0d8;
+        border: 1px solid #d6e9c6;
+        border-radius: 4px;
+        color: #3c763d;
+        font-weight: bold;
       }
     </style>
   </head>
   <body>
-    <h1 class="heading">Remove Background from Images</h1>
-    <form enctype="multipart/form-data" action="/process" method="post">
-      <input type="file" name="images" multiple accept=".jpg, .png" />
-      <input type="submit" value="Remove Background" />
-    </form>
+    <div class="container">
+      <h1 class="heading">Remove Background from Images</h1>
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <div class="message">
+        {% for message in messages %} {{ message }} {% endfor %}
+      </div>
+      {% endif %} {% endwith %}
+      <form enctype="multipart/form-data" action="/process" method="post">
+        <label for="images">Select Image(s) (JPG/PNG):</label>
+        <input
+          type="file"
+          name="images"
+          id="images"
+          multiple
+          accept=".jpg, .png"
+        />
+        <br />
+        <label for="action">Choose an action:</label>
+        <select name="action" id="action">
+          <option value="download">Download ZIP</option>
+          <option value="save">Save to MySQL</option>
+        </select>
+        <br /><br />
+        <button type="submit">Process</button>
+      </form>
+    </div>
   </body>
 </html>
