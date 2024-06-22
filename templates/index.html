@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Remove Background</title>
+    <style>
+      .heading {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="heading">Remove Background from Images</h1>
+    <form enctype="multipart/form-data" action="/process" method="post">
+      <input type="file" name="images" multiple accept=".jpg, .png" />
+      <input type="submit" value="Remove Background" />
+    </form>
+  </body>
+</html>
